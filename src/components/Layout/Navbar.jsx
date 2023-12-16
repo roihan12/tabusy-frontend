@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 const Navbar = ({ active }) => {
-    console.log(navItems)
+    // console.log(navItems)
   return (
     <div className={`${styles.noramlFlex}`}>
       {navItems &&

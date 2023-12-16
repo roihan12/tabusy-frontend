@@ -21,11 +21,12 @@ const Login = () => {
           email,
           password,
         },
-        {withCredentials:true}
+        { withCredentials: true }
       )
       .then(() => {
         toast.success("Login success!");
         navigate("/");
+        window.location.reload();
       })
       .catch((err) => {
         toast.error(err.response.data.message);

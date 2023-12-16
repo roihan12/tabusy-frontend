@@ -15,6 +15,10 @@ export default {
         "1300px": "1300px",
         "400px": "400px",
       },
+      backgroundImage: {
+        'hero': "url('https://themes.rslahmed.dev/rafcart/assets/images/banner-2.jpg')",
+    
+    },
     },
   },
   plugins: [],

@@ -6,20 +6,21 @@ const DropDown = ({ categoriesData, setDropDown }) => {
 
     const navigate =  useNavigate();
 
-    const handleSubmit = (product)=> {
-        navigate(`/products?category=${product.title}`)
+    const handleSubmit = (category)=> {
+        navigate(`/products?category=${category.title}`)
         setDropDown(false)
         window.location.reload()
     }
 
 
+
   return (
-   <div className='pb-4 w-[270px] bg-white absolute -z-30 rounded-b-md shadow-sm'>
+   <div className='pb-4 w-[270px] bg-white absolute z-30 rounded-b-md shadow-sm'>
 
     {
         categoriesData && categoriesData.map((category, index) => (
 
-            <div key={index} className={`${styles.noramlFlex}`} onClick={() => handleSubmit(category)}>
+            <div key={index} className={`${styles.noramlFlex}` } onClick={() => handleSubmit(category)}>
             <img src={category.image_Url} alt="category image" style={
                 {
                     width:"25px",

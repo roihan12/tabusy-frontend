@@ -230,13 +230,13 @@ export const categoriesData = [
     title: "Gifts",
     subTitle: "",
     image_Url:
-      "https://securecdn.pymnts.com/wp-content/uploads/2014/11/Gifts-Photo-700x489.jpg",
+      "https://croatianvintage.com.au/wp-content/uploads/2022/06/gift-box.jpg",
   },
   {
     id: 7,
     title: "Pet Care",
     subTitle: "",
-    image_Url: "https://cdn.openpr.com/T/c/Tc15444071_g.jpg",
+    image_Url: "https://st3.depositphotos.com/11956860/19344/v/1600/depositphotos_193444142-stock-illustration-icon-illustration-concept-pet-care.jpg",
   },
   {
     id: 8,
@@ -272,7 +272,7 @@ export const productData = [
     image_Url: [
       {
         public_id: "test",
-        url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
+        url: "https://cdn.eraspace.com/media/catalog/product/m/a/macbook_pro_m2_2022_space_grey_1_4.jpg",
       },
       {
         public_id: "test",
@@ -331,7 +331,7 @@ export const productData = [
     image_Url: [
       {
         public_id: "test",
-        url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
+        url: "https://cdn.eraspace.com/media/catalog/product/m/a/macbook_pro_m2_2022_space_grey_2_2_2.jpg",
       },
       {
         public_id: "test",

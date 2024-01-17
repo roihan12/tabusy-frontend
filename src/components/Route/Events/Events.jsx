@@ -11,7 +11,6 @@ const Events = () => {
       </div>
       
       <div className='w-full grid'>
-
         <EventCard/>
       </div>
     </div>

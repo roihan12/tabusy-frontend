@@ -1,25 +1,25 @@
 import React, { useEffect } from "react";
-
-import Login from "../components/Login/Login";
+import ShopLogin from "../components/Shop/ShopLogin";
 import { useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
-  const { isAuthenticated } = useSelector((state) => state.user);
+const ShopLoginPage = () => {
+  const { isSeller, seller } = useSelector((state) => state.seller);
   const navigate = useNavigate();
   useEffect(() => {
-    if (isAuthenticated === true) {
-      navigate("/");
+    if (isSeller === true) {
+      navigate(`/shop/${seller._id}`);
     }
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="w-full h-screen bg-gray-50">
-      <Login />
+    <div>
+      <ShopLogin />
     </div>
   );
 };
-export default LoginPage;
+
+export default ShopLoginPage;

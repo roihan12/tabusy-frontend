@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/data-grid": "^4.0.0-alpha.37",
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.2",
     "country-state-city": "^3.2.1",

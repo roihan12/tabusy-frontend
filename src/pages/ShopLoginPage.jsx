@@ -5,15 +5,15 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ShopLoginPage = () => {
-  const { isSeller, seller } = useSelector((state) => state.seller);
+  const { isSeller, isLoading } = useSelector((state) => state.seller);
   const navigate = useNavigate();
   useEffect(() => {
     if (isSeller === true) {
-      navigate(`/shop/${seller._id}`);
+      navigate(`/dashboard`);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoading,isSeller]);
 
   return (
     <div>

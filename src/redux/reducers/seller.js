@@ -1,4 +1,4 @@
-import { Tuple, createReducer } from "@reduxjs/toolkit";
+import {createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoading: true,

@@ -15,7 +15,13 @@ import {
   SellerActivationPage,
   ShopLoginPage,
 } from "./routes/Routes";
-import { ShopDashboardPage, ShopCreateProductPage } from "./routes/ShopRoutes";
+import {
+  ShopDashboardPage,
+  ShopCreateProductPage,
+  ShopAllProductsPage,
+  ShopCreateEventsPage,
+  ShopAllEventsPage
+} from "./routes/ShopRoutes";
 import { ShopHomePage } from "./ShopRoutes";
 import React, { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
@@ -80,6 +86,30 @@ function App() {
             }
           />
           <Route
+            path="/dashboard-products"
+            element={
+              <SellerProtectedRoute>
+                <ShopAllProductsPage />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard-create-events"
+            element={
+              <SellerProtectedRoute>
+                <ShopCreateEventsPage />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard-events"
+            element={
+              <SellerProtectedRoute>
+                <ShopAllEventsPage />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
             path="/profile"
             element={
               <ProtectedRoute>
@@ -99,7 +129,7 @@ function App() {
         </Routes>
 
         <ToastContainer
-          position="top-right"
+          position="top-center"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}

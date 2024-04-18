@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { categoriesData } from "../../static/data";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { createProduct } from "../../redux/actions/product";
+import { createEvent } from "../../redux/actions/event";
 import { toast } from "react-toastify";
 
-const CreateProduct = () => {
+const CreateEvent = () => {
   const { seller } = useSelector((state) => state.seller);
-  const { success, error } = useSelector((state) => state.products);
+  const { success, error } = useSelector((state) => state.events);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,13 +20,38 @@ const CreateProduct = () => {
   const [originalPrice, setOriginalPrice] = useState();
   const [discountPrice, setDiscountPrice] = useState();
   const [stock, setStock] = useState();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const handleStartDateChange = (e) => {
+    const startDate = new Date(e.target.value);
+    const minEndDate = new Date(startDate.getTime() + 3 * 24 * 60 * 60 * 1000);
+    setStartDate(startDate);
+    setEndDate(null);
+
+    document.getElementById("endDate").min = minEndDate
+      .toISOString()
+      .slice(0, 10);
+  };
+
+  const handleEndDateChange = (e) => {
+    const endDate = new Date(e.target.value);
+    setEndDate(endDate);
+  };
+
+  const today = new Date().toISOString().slice(0, 10);
+  const minEndDate = startDate
+    ? new Date(startDate.getTime() + 3 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .slice(0, 10)
+    : today;
 
   useEffect(() => {
     if (error) {
       toast.error(error);
     }
     if (success) {
-      toast.success("Product created successfully");
+      toast.success("Event created successfully");
       navigate("/dashboard");
       window.location.reload();
     }
@@ -48,8 +73,10 @@ const CreateProduct = () => {
     newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
     newForm.append("shopId", seller._id);
+    newForm.append("startDate", startDate.toISOString());
+    newForm.append("finishDate", endDate.toISOString());
 
-    dispatch(createProduct(newForm));
+    dispatch(createEvent(newForm));
   };
 
   const handleImageChange = (e) => {
@@ -60,9 +87,9 @@ const CreateProduct = () => {
 
   return (
     <div className="w-[90%] 800px:w-[50%] bg-white shadow h-[80vh] rounded-[4px] p-3 overflow-y-auto ">
-      <h5 className="text-[30px] font-Poppins text-center">Create Product</h5>
+      <h5 className="text-[30px] font-Poppins text-center">Create Event</h5>
 
-      {/* Create Product */}
+      {/* Create Event*/}
       <form onSubmit={handleSubmit}>
         <br />
         <div>
@@ -75,7 +102,7 @@ const CreateProduct = () => {
             name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your product name..."
+            placeholder="Enter your event product name..."
           />
         </div>
         <br />
@@ -86,12 +113,12 @@ const CreateProduct = () => {
           <textarea
             cols="30"
             rows="8"
-            className="mt-2 appearance-none block w-full pt-2 px-3  border border-gray-300 rounded-[3px] placeholder-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full px-3 pt-2 border border-gray-300 rounded-[3px] placeholder-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             type="text"
             name="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Enter your description.."
+            placeholder="Enter your event description.."
           >
             {" "}
           </textarea>
@@ -125,7 +152,7 @@ const CreateProduct = () => {
             name="tags"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            placeholder="Enter your product tags..."
+            placeholder="Enter your event product tags..."
           />
         </div>
         <br />
@@ -137,7 +164,7 @@ const CreateProduct = () => {
             name="price"
             value={originalPrice}
             onChange={(e) => setOriginalPrice(e.target.value)}
-            placeholder="Enter your product price..."
+            placeholder="Enter your event product price..."
           />
         </div>
         <br />
@@ -151,7 +178,7 @@ const CreateProduct = () => {
             name="price"
             value={discountPrice}
             onChange={(e) => setDiscountPrice(e.target.value)}
-            placeholder="Enter your product price with discount..."
+            placeholder="Enter your event product price with discount..."
           />
         </div>
         <br />
@@ -165,7 +192,37 @@ const CreateProduct = () => {
             name="stock"
             value={stock}
             onChange={(e) => setStock(e.target.value)}
-            placeholder="Enter your product stock..."
+            placeholder="Enter your event product stock..."
+          />
+        </div>
+        <br />
+        <div>
+          <label className="pb-2">
+            Event Start Date <span className="text-red-500">*</span>
+          </label>
+          <input
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            type="date"
+            id="startDate"
+            name="startDate"
+            value={startDate ? startDate.toISOString().slice(0, 10) : ""}
+            onChange={handleStartDateChange}
+            min={today}
+          />
+        </div>
+        <br />
+        <div>
+          <label className="pb-2">
+            Event End Date <span className="text-red-500">*</span>
+          </label>
+          <input
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            type="date"
+            id="endDate"
+            name="endDate"
+            value={endDate ? endDate.toISOString().slice(0, 10) : ""}
+            min={minEndDate}
+            onChange={handleEndDateChange}
           />
         </div>
         <br />
@@ -213,4 +270,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default CreateEvent;
